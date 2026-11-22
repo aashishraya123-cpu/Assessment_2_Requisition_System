@@ -24,7 +24,7 @@ class Requisition:
 
         return self.total
 
-    
+
     def approve_requisition(self):
         if self.total < 500:
             self.status = "Approved"
@@ -32,6 +32,17 @@ class Requisition:
         else:
             self.status = "Pending"
             self.approval_reference = "Not available"
+
+        return self.status
+
+        def manager_response(self, decision):
+            if self.status == "Pending":
+             if decision == "Approved":
+                self.status = "Approved"
+                self.approval_reference = self.staff_id + str(self.requisition_id)[-3:]
+            elif decision == "Rejected":
+                self.status = "Rejected"
+                self.approval_reference = "Not available"
 
         return self.status
 
