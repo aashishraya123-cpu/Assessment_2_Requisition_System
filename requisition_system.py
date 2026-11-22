@@ -47,6 +47,29 @@ class Requisition:
         return self.status
 
 
+    def display_requisition(self):
+        print("\nDate:", self.date)
+        print("Requisition ID:", self.requisition_id)
+        print("Staff ID:", self.staff_id)
+        print("Staff Name:", self.staff_name)
+        print("Total: $", self.total)
+        print("Status:", self.status)
+        print("Approval Reference Number:", self.approval_reference)
+
+    def requisition_statistics(self, requisitions):
+        total = len(requisitions)
+        approved = sum(r.status == "Approved" for r in requisitions)
+        pending = sum(r.status == "Pending" for r in requisitions)
+        not_approved = sum(r.status == "Rejected" for r in requisitions)
+
+        print("\n--- Requisition Statistics ---")
+        print("Total Requisitions:", total)
+        print("Approved:", approved)
+        print("Pending:", pending)
+        print("Not Approved:", not_approved)
+
+        return total, approved, pending, not_approved
+
 # Testing the class
 date = input("Enter date: ")
 staff_id = input("Enter staff ID: ")
@@ -102,16 +125,8 @@ request5.approve_requisition()
 requisitions.append(request5)
 print("\n--- All Requisitions ---")
 
+
 for r in requisitions:
-    print("\nDate:", r.date)
-    print("Requisition ID:", r.requisition_id)
-    print("Staff ID:", r.staff_id)
-    print("Staff Name:", r.staff_name)
-    print("Total: $", r.total)
-    print("Status:", r.status)
-    print("Approval Reference Number:", r.approval_reference)
-    print("\n--- Requisition Statistics ---")
-print("Total Requisitions:", len(requisitions))
-print("Approved:", sum(r.status == "Approved" for r in requisitions))
-print("Pending:", sum(r.status == "Pending" for r in requisitions))
-print("Not Approved:", sum(r.status == "Rejected" for r in requisitions))
+    r.display_requisition()
+
+request.requisition_statistics(requisitions)
