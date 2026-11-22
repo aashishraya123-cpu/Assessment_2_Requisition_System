@@ -35,7 +35,7 @@ class Requisition:
 
         return self.status
 
-        def manager_response(self, decision):
+    def manager_response(self, decision):
             if self.status == "Pending":
              if decision == "Approved":
                 self.status = "Approved"
@@ -44,7 +44,7 @@ class Requisition:
                 self.status = "Rejected"
                 self.approval_reference = "Not available"
 
-        return self.status
+            return self.status
 
 
 # Testing the class
@@ -76,3 +76,8 @@ print("Staff ID:", request.staff_id)
 print("Staff Name:", request.staff_name)
 print("Status:", request.status)
 print("Approval Reference:", request.approval_reference)
+
+if request.status == "Pending":
+    request.manager_response("Approved")
+    print("Manager Decision:", request.status)
+    print("Approval Reference:", request.approval_reference)
